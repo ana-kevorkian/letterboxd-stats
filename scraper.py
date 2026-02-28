@@ -218,7 +218,7 @@ def scrape_user(
         for i, entry in enumerate(needs_tags):
             if on_progress:
                 on_progress(
-                    f"Fetching tags for "{entry.title}" ({i + 1}/{total})…",
+                    f"Fetching tags for '{entry.title}' ({i + 1}/{total})…",
                     (i + 1) / total,
                 )
             entry.tags = _scrape_date_page_tags(username, entry.date, entry.slug)
