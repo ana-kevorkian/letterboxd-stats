@@ -259,7 +259,7 @@ with st.expander("HOW TO EXPORT YOUR DATA", expanded=True):
         unsafe_allow_html=True,
     )
 
-uploaded = st.file_uploader("", type="csv", label_visibility="collapsed")
+uploaded = st.file_uploader("Upload diary.csv", type="csv", label_visibility="collapsed")
 
 if not uploaded:
     st.stop()
@@ -364,13 +364,12 @@ fig.update_layout(
     xaxis=dict(gridcolor="#2c3440", zerolinecolor="#456"),
     yaxis=dict(gridcolor="#2c3440"),
     coloraxis_colorbar=dict(
-        title="vs avg",
+        title=dict(text="vs avg", font=dict(color="#9ab")),
         tickfont=dict(color="#9ab"),
-        titlefont=dict(color="#9ab"),
     ),
     margin=dict(l=0, r=10, t=10, b=20),
 )
-st.plotly_chart(fig, use_container_width=True)
+st.plotly_chart(fig, width="stretch")
 
 # Table
 st.dataframe(
@@ -378,7 +377,7 @@ st.dataframe(
         "tag": "Tag", "films": "Films", "avg": "Avg Rating",
         "median": "Median", "vs_avg": "vs Your Avg",
     }),
-    use_container_width=True, hide_index=True,
+    width="stretch", hide_index=True,
     column_config={
         "vs Your Avg": st.column_config.NumberColumn(format="%+.2f ★"),
         "Avg Rating": st.column_config.NumberColumn(format="%.2f ★"),
@@ -410,7 +409,7 @@ if tag_choice_dist:
         bargap=0.1, margin=dict(t=10, b=20),
         legend=dict(bgcolor="#2c3440", bordercolor="#456", borderwidth=1),
     )
-    st.plotly_chart(fig2, use_container_width=True)
+    st.plotly_chart(fig2, width="stretch")
 
 # ── Film explorer ──────────────────────────────────────────────────────────────
 st.markdown('<p class="lb-section-header">Films by tag</p>', unsafe_allow_html=True)
@@ -425,7 +424,7 @@ if tag_choice_films:
         .sort_values("rating", ascending=False)
     )
     st.dataframe(
-        film_rows, use_container_width=True, hide_index=True,
+        film_rows, width="stretch", hide_index=True,
         column_config={
             "rating": st.column_config.NumberColumn("Rating", format="%.1f ★"),
             "rewatch": st.column_config.CheckboxColumn("Rewatch"),
